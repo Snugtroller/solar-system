@@ -584,8 +584,31 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"fgDBQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _three = require("three");
 var _orbitControlsJs = require("three/examples/jsm/controls/OrbitControls.js");
+var _sunmapJpg = require("../Images/sunmap.jpg");
+var _sunmapJpgDefault = parcelHelpers.interopDefault(_sunmapJpg);
+var _mercurymapJpg = require("../Images/mercurymap.jpg");
+var _mercurymapJpgDefault = parcelHelpers.interopDefault(_mercurymapJpg);
+var _venusmapJpg = require("../Images/venusmap.jpg");
+var _venusmapJpgDefault = parcelHelpers.interopDefault(_venusmapJpg);
+var _earthmap1KJpg = require("../Images/earthmap1k.jpg");
+var _earthmap1KJpgDefault = parcelHelpers.interopDefault(_earthmap1KJpg);
+var _marsmap1KJpg = require("../Images/marsmap1k.jpg");
+var _marsmap1KJpgDefault = parcelHelpers.interopDefault(_marsmap1KJpg);
+var _jupitermapJpg = require("../Images/jupitermap.jpg");
+var _jupitermapJpgDefault = parcelHelpers.interopDefault(_jupitermapJpg);
+var _saturnmapJpg = require("../Images/saturnmap.jpg");
+var _saturnmapJpgDefault = parcelHelpers.interopDefault(_saturnmapJpg);
+var _saturnringcolorJpg = require("../Images/saturnringcolor.jpg");
+var _saturnringcolorJpgDefault = parcelHelpers.interopDefault(_saturnringcolorJpg);
+var _uranusmapJpg = require("../Images/uranusmap.jpg");
+var _uranusmapJpgDefault = parcelHelpers.interopDefault(_uranusmapJpg);
+var _uranusringcolourJpg = require("../Images/uranusringcolour.jpg");
+var _uranusringcolourJpgDefault = parcelHelpers.interopDefault(_uranusringcolourJpg);
+var _neptunemapJpg = require("../Images/neptunemap.jpg");
+var _neptunemapJpgDefault = parcelHelpers.interopDefault(_neptunemapJpg);
 const renderer = new _three.WebGLRenderer({
     antialias: true
 });
@@ -594,7 +617,7 @@ document.body.appendChild(renderer.domElement);
 // Set the color of the background
 renderer.setClearColor(0x000000); // black background for starfield effect
 const scene = new _three.Scene();
-const camera = new _three.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new _three.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
 // Sets orbit control to move the camera around.
 const orbit = new (0, _orbitControlsJs.OrbitControls)(camera, renderer.domElement);
 // Camera positioning.
@@ -606,15 +629,6 @@ scene.add(gridHelper);
 // Creates an axes helper with an axis length of 4.
 const axesHelper = new _three.AxesHelper(4);
 scene.add(axesHelper);
-const color = new _three.Color("#FDB813");
-const geometry = new _three.IcosahedronGeometry(1, 15);
-const material = new _three.MeshBasicMaterial({
-    color: color
-});
-const sphere = new _three.Mesh(geometry, material);
-sphere.position.set(0, 0, 0);
-sphere.layers.set(1);
-scene.add(sphere);
 // Stars array to hold the star objects
 let stars = [];
 // Add stars to the scene
@@ -639,6 +653,127 @@ function addStars() {
         stars.push(sphere);
     }
 }
+const textureLoader = new _three.TextureLoader();
+// Sun
+const sunMap = new _three.SphereGeometry(16, 30, 30);
+const sunMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _sunmapJpgDefault.default))
+});
+const sun = new _three.Mesh(sunMap, sunMat);
+scene.add(sun);
+// Planets and their orbits
+// Mercury
+const mercuryMap = new _three.SphereGeometry(3.2, 30, 30);
+const mercuryMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _mercurymapJpgDefault.default))
+});
+const mercury = new _three.Mesh(mercuryMap, mercuryMat);
+const mercuryOrbitRadius = 30;
+scene.add(mercury);
+// Venus
+const venusMap = new _three.SphereGeometry(8, 30, 30);
+const venusMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _venusmapJpgDefault.default))
+});
+const venus = new _three.Mesh(venusMap, venusMat);
+const venusOrbitRadius = mercuryOrbitRadius * 1.87;
+scene.add(venus);
+// Earth
+const earthMap = new _three.SphereGeometry(8.5, 30, 30);
+const earthMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _earthmap1KJpgDefault.default))
+});
+const earth = new _three.Mesh(earthMap, earthMat);
+const earthOrbitRadius = mercuryOrbitRadius * 2.57;
+scene.add(earth);
+// Mars
+const marsMap = new _three.SphereGeometry(4.5, 30, 30);
+const marsMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _marsmap1KJpgDefault.default))
+});
+const mars = new _three.Mesh(marsMap, marsMat);
+const marsOrbitRadius = mercuryOrbitRadius * 3.88;
+scene.add(mars);
+// Jupiter
+const jupiterMap = new _three.SphereGeometry(10, 30, 30);
+const jupiterMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _jupitermapJpgDefault.default))
+});
+const jupiter = new _three.Mesh(jupiterMap, jupiterMat);
+const jupiterOrbitRadius = mercuryOrbitRadius * 7.33;
+scene.add(jupiter);
+// Saturn
+const saturnMap = new _three.SphereGeometry(9, 30, 30);
+const saturnMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _saturnmapJpgDefault.default))
+});
+const saturn = new _three.Mesh(saturnMap, saturnMat);
+const saturnOrbitRadius = mercuryOrbitRadius * 10.47;
+scene.add(saturn);
+// Uranus
+const uranusMap = new _three.SphereGeometry(8.2, 30, 30);
+const uranusMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _uranusmapJpgDefault.default))
+});
+const uranus = new _three.Mesh(uranusMap, uranusMat);
+const uranusOrbitRadius = mercuryOrbitRadius * 12.26;
+scene.add(uranus);
+// Neptune
+const neptuneMap = new _three.SphereGeometry(7.9, 30, 30);
+const neptuneMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _neptunemapJpgDefault.default))
+});
+const neptune = new _three.Mesh(neptuneMap, neptuneMat);
+const neptuneOrbitRadius = mercuryOrbitRadius * 14.27;
+scene.add(neptune);
+//RINGS
+const saturnRingGeo = new _three.RingGeometry(10, 20, 32); // Inner and outer radius of the ring
+const saturnRingMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _saturnringcolorJpgDefault.default)),
+    side: _three.DoubleSide,
+    transparent: true
+});
+const saturnRing = new _three.Mesh(saturnRingGeo, saturnRingMat);
+saturnRing.rotation.x = Math.PI / 2; // Rotate to lie flat around the planet
+saturnRing.position.set(saturn.position.x, saturn.position.y, saturn.position.z); // Position it around Saturn
+scene.add(saturnRing);
+// Add rings to Uranus
+const uranusRingGeo = new _three.RingGeometry(8, 12, 32); // Adjust the inner and outer radius as needed
+const uranusRingMat = new _three.MeshBasicMaterial({
+    map: textureLoader.load((0, _uranusringcolourJpgDefault.default)),
+    side: _three.DoubleSide,
+    transparent: true
+});
+const uranusRing = new _three.Mesh(uranusRingGeo, uranusRingMat);
+uranusRing.rotation.x = Math.PI / 2; // Rotate to lie flat around Uranus
+uranusRing.position.set(uranus.position.x, uranus.position.y, uranus.position.z); // Position it around Uranus
+scene.add(uranusRing);
+// Variables for planet orbit animations
+let mercuryAngle = 0;
+let venusAngle = 0;
+let earthAngle = 0;
+let marsAngle = 0;
+let jupiterAngle = 0;
+let saturnAngle = 0;
+let uranusAngle = 0;
+let neptuneAngle = 0;
+// Define speeds (in km/s) and calculate corresponding angular velocities
+const mercurySpeed = 17.9;
+const venusSpeed = 15.0;
+const earthSpeed = 13.8;
+const marsSpeed = 10.0;
+const jupiterSpeed = 8.1;
+const saturnSpeed = 7.69;
+const uranusSpeed = 6.81;
+const neptuneSpeed = 3.43;
+const mercuryAngularSpeed = mercurySpeed / mercuryOrbitRadius;
+const venusAngularSpeed = venusSpeed / venusOrbitRadius;
+const earthAngularSpeed = earthSpeed / earthOrbitRadius;
+const marsAngularSpeed = marsSpeed / marsOrbitRadius;
+const jupiterAngularSpeed = jupiterSpeed / jupiterOrbitRadius;
+const saturnAngularSpeed = saturnSpeed / saturnOrbitRadius;
+const uranusAngularSpeed = uranusSpeed / uranusOrbitRadius;
+const neptuneAngularSpeed = neptuneSpeed / neptuneOrbitRadius;
 // Animate stars (move them forward to create the "moving" starfield effect)
 function animateStars() {
     for(let i = 0; i < stars.length; i++){
@@ -653,6 +788,46 @@ function animateStars() {
 function animate() {
     // Update the star positions
     animateStars();
+    // Rotate the sun on its axis
+    sun.rotation.y += 0.005;
+    // Rotate planets on their axes and move them around the Sun
+    mercury.rotation.y += 0.02;
+    mercuryAngle += mercuryAngularSpeed;
+    mercury.position.x = mercuryOrbitRadius * Math.cos(mercuryAngle);
+    mercury.position.z = mercuryOrbitRadius * Math.sin(mercuryAngle);
+    venus.rotation.y += 0.02;
+    venusAngle += venusAngularSpeed;
+    venus.position.x = venusOrbitRadius * Math.cos(venusAngle);
+    venus.position.z = venusOrbitRadius * Math.sin(venusAngle);
+    earth.rotation.y += 0.02;
+    earthAngle += earthAngularSpeed;
+    earth.position.x = earthOrbitRadius * Math.cos(earthAngle);
+    earth.position.z = earthOrbitRadius * Math.sin(earthAngle);
+    mars.rotation.y += 0.02;
+    marsAngle += marsAngularSpeed;
+    mars.position.x = marsOrbitRadius * Math.cos(marsAngle);
+    mars.position.z = marsOrbitRadius * Math.sin(marsAngle);
+    jupiter.rotation.y += 0.02;
+    jupiterAngle += jupiterAngularSpeed;
+    jupiter.position.x = jupiterOrbitRadius * Math.cos(jupiterAngle);
+    jupiter.position.z = jupiterOrbitRadius * Math.sin(jupiterAngle);
+    saturn.rotation.y += 0.02;
+    saturnAngle += saturnAngularSpeed;
+    saturn.position.x = saturnOrbitRadius * Math.cos(saturnAngle);
+    saturn.position.z = saturnOrbitRadius * Math.sin(saturnAngle);
+    uranus.rotation.y += 0.02;
+    uranusAngle += uranusAngularSpeed;
+    uranus.position.x = uranusOrbitRadius * Math.cos(uranusAngle);
+    uranus.position.z = uranusOrbitRadius * Math.sin(uranusAngle);
+    neptune.rotation.y += 0.02;
+    neptuneAngle += neptuneAngularSpeed;
+    neptune.position.x = neptuneOrbitRadius * Math.cos(neptuneAngle);
+    neptune.position.z = neptuneOrbitRadius * Math.sin(neptuneAngle);
+    saturnRing.position.x = saturn.position.x;
+    saturnRing.position.z = saturn.position.z;
+    // Move Uranus's rings with the planet
+    uranusRing.position.x = uranus.position.x;
+    uranusRing.position.z = uranus.position.z;
     // Render the scene
     renderer.render(scene, camera);
 }
@@ -666,7 +841,7 @@ window.addEventListener("resize", function() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../Images/sunmap.jpg":"2Y1Lg","../Images/mercurymap.jpg":"6n3Pz","../Images/venusmap.jpg":"egpNa","../Images/earthmap1k.jpg":"ffJ5o","../Images/marsmap1k.jpg":"4yDs6","../Images/jupitermap.jpg":"dNfLR","../Images/saturnmap.jpg":"dWbQX","../Images/uranusmap.jpg":"8DeCU","../Images/neptunemap.jpg":"lSlhM","../Images/saturnringcolor.jpg":"8Ryyg","../Images/uranusringcolour.jpg":"GiPLn"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2024 Three.js Authors
@@ -33033,6 +33208,74 @@ function interceptControlUp(event) {
     }
 }
 
-},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ad9BD","fgDBQ"], "fgDBQ", "parcelRequiref7a6")
+},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2Y1Lg":[function(require,module,exports) {
+module.exports = require("6f330262fbf0941a").getBundleURL("9ULLa") + "sunmap.3db85267.jpg" + "?" + Date.now();
+
+},{"6f330262fbf0941a":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+}
+// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"6n3Pz":[function(require,module,exports) {
+module.exports = require("600463507e914352").getBundleURL("9ULLa") + "mercurymap.bf6ba640.jpg" + "?" + Date.now();
+
+},{"600463507e914352":"lgJ39"}],"egpNa":[function(require,module,exports) {
+module.exports = require("e6d4260d2a4cae3a").getBundleURL("9ULLa") + "venusmap.a805159d.jpg" + "?" + Date.now();
+
+},{"e6d4260d2a4cae3a":"lgJ39"}],"ffJ5o":[function(require,module,exports) {
+module.exports = require("2f730e9ebb562af2").getBundleURL("9ULLa") + "earthmap1k.7d9d199b.jpg" + "?" + Date.now();
+
+},{"2f730e9ebb562af2":"lgJ39"}],"4yDs6":[function(require,module,exports) {
+module.exports = require("d0efefb2861fbda1").getBundleURL("9ULLa") + "marsmap1k.9d685d55.jpg" + "?" + Date.now();
+
+},{"d0efefb2861fbda1":"lgJ39"}],"dNfLR":[function(require,module,exports) {
+module.exports = require("97510f399f218228").getBundleURL("9ULLa") + "jupitermap.6107cc66.jpg" + "?" + Date.now();
+
+},{"97510f399f218228":"lgJ39"}],"dWbQX":[function(require,module,exports) {
+module.exports = require("5b44ae1ffa436e4a").getBundleURL("9ULLa") + "saturnmap.46b72403.jpg" + "?" + Date.now();
+
+},{"5b44ae1ffa436e4a":"lgJ39"}],"8DeCU":[function(require,module,exports) {
+module.exports = require("2a8c8435a6abed14").getBundleURL("9ULLa") + "uranusmap.fa6d2d0c.jpg" + "?" + Date.now();
+
+},{"2a8c8435a6abed14":"lgJ39"}],"lSlhM":[function(require,module,exports) {
+module.exports = require("b4f7097d778c1c63").getBundleURL("9ULLa") + "neptunemap.89ba9e96.jpg" + "?" + Date.now();
+
+},{"b4f7097d778c1c63":"lgJ39"}],"8Ryyg":[function(require,module,exports) {
+module.exports = require("65ff37d820b32e5a").getBundleURL("9ULLa") + "saturnringcolor.c76647b7.jpg" + "?" + Date.now();
+
+},{"65ff37d820b32e5a":"lgJ39"}],"GiPLn":[function(require,module,exports) {
+module.exports = require("514aac0f3fc8a368").getBundleURL("9ULLa") + "uranusringcolour.7b51f9fc.jpg" + "?" + Date.now();
+
+},{"514aac0f3fc8a368":"lgJ39"}]},["ad9BD","fgDBQ"], "fgDBQ", "parcelRequiref7a6")
 
 //# sourceMappingURL=index.23660007.js.map
